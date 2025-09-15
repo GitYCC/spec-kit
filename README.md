@@ -233,31 +233,28 @@ specify init <project_name> --ai claude --ignore-agent-tools
 範例提示：
 
 ```text
-Develop Taskify, a team productivity platform. It should allow users to create projects, add team members,
-assign tasks, comment and move tasks between boards in Kanban style. In this initial phase for this feature,
-let's call it "Create Taskify," let's have multiple users but the users will be declared ahead of time, predefined.
-I want five users in two different categories, one product manager and four engineers. Let's create three
-different sample projects. Let's have the standard Kanban columns for the status of each task, such as "To Do,"
-"In Progress," "In Review," and "Done." There will be no login for this application as this is just the very
-first testing thing to ensure that our basic features are set up. For each task in the UI for a task card,
-you should be able to change the current status of the task between the different columns in the Kanban work board.
-You should be able to leave an unlimited number of comments for a particular card. You should be able to, from that task
-card, assign one of the valid users. When you first launch Taskify, it's going to give you a list of the five users to pick
-from. There will be no password required. When you click on a user, you go into the main view, which displays the list of
-projects. When you click on a project, you open the Kanban board for that project. You're going to see the columns.
-You'll be able to drag and drop cards back and forth between different columns. You will see any cards that are
-assigned to you, the currently logged in user, in a different color from all the other ones, so you can quickly
-see yours. You can edit any comments that you make, but you can't edit comments that other people made. You can
-delete any comments that you made, but you can't delete comments anybody else made.
+開發 Taskify，一個團隊生產力平台。它應該允許使用者建立專案、新增團隊成員、指派任務、留言，
+並以 Kanban 風格在看板之間移動任務。在這個功能的初始階段，我們稱之為「Create Taskify」，
+讓我們設定多個使用者，但使用者將提前宣告、預先定義。我希望有五個使用者分為兩個不同類別，
+一個產品經理和四個工程師。讓我們建立三個不同的範例專案。每個任務的狀態應該有標準的 Kanban 欄位，
+例如「待辦」、「進行中」、「審核中」和「完成」。此應用程式不會有登入功能，因為這只是確保我們基本功能
+設定正確的第一個測試。對於 UI 中的每個任務卡片，你應該能夠在 Kanban 工作看板的不同欄位之間
+更改任務的目前狀態。你應該能夠為特定卡片留下無限數量的留言。你應該能夠從該任務卡片指派
+有效使用者之一。當你第一次啟動 Taskify 時，它會給你一個五個使用者的清單供選擇。
+不需要密碼。當你點擊使用者時，你會進入主檢視，顯示專案清單。當你點擊專案時，
+你會開啟該專案的 Kanban 看板。你會看到欄位。你能夠在不同欄位之間拖拉卡片。
+你會看到指派給你（目前登入的使用者）的任何卡片以不同顏色顯示，以便你能夠快速辨識你的卡片。
+你可以編輯你製作的任何留言，但不能編輯其他人製作的留言。你可以刪除你製作的任何留言，
+但不能刪除其他人製作的留言。
 ```
 
-After this prompt is entered, you should see Claude Code kick off the planning and spec drafting process. Claude Code will also trigger some of the built-in scripts to set up the repository.
+輸入此提示後，你應該會看到 Claude Code 啟動規劃和規格起草流程。Claude Code 也會觸發一些內建的 scripts 來設定 repository。
 
-Once this step is completed, you should have a new branch created (e.g., `001-create-taskify`), as well as a new specification in the `specs/001-create-taskify` directory.
+完成此步驟後，你應該會有一個新建立的分支（例如 `001-create-taskify`），以及在 `specs/001-create-taskify` 目錄中的新規格。
 
-The produced specification should contain a set of user stories and functional requirements, as defined in the template.
+產生的規格應該包含一套使用者故事和功能需求，如樣板中定義的那樣。
 
-At this stage, your project folder contents should resemble the following:
+在此階段，你的專案資料夾內容應該類似於以下內容：
 
 ```text
 ├── memory
@@ -279,35 +276,31 @@ At this stage, your project folder contents should resemble the following:
     └── tasks-template.md
 ```
 
-### **STEP 2:** Functional specification clarification
+### **步驟 2：** 功能規格澄清
 
-With the baseline specification created, you can go ahead and clarify any of the requirements that were not captured properly within the first shot attempt. For example, you could use a prompt like this within the same Claude Code session:
-
-```text
-For each sample project or project that you create there should be a variable number of tasks between 5 and 15
-tasks for each one randomly distributed into different states of completion. Make sure that there's at least
-one task in each stage of completion.
-```
-
-You should also ask Claude Code to validate the **Review & Acceptance Checklist**, checking off the things that are validated/pass the requirements, and leave the ones that are not unchecked. The following prompt can be used:
+建立基本規格後，你可以進一步澄清在第一次嘗試中沒有正確捕捉到的任何需求。例如，你可以在同一個 Claude Code 會話中使用這樣的提示：
 
 ```text
-Read the review and acceptance checklist, and check off each item in the checklist if the feature spec meets the criteria. Leave it empty if it does not.
+對於你建立的每個範例專案，應該有 5 到 15 個任務，隨機分佈在不同的完成狀態中。確保每個完成階段至少有一個任務。
 ```
 
-It's important to use the interaction with Claude Code as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
-
-### **STEP 3:** Generate a plan
-
-You can now be specific about the tech stack and other technical requirements. You can use the `/plan` command that is built into the project template with a prompt like this:
+你也應該要求 Claude Code 驗證**審核與接受清單**，勾選通過驗證/符合需求的項目，未符合的項目則保持未勾選。可以使用以下提示：
 
 ```text
-We are going to generate this using .NET Aspire, using Postgres as the database. The frontend should use
-Blazor server with drag-and-drop task boards, real-time updates. There should be a REST API created with a projects API,
-tasks API, and a notifications API.
+閱讀審核與接受清單，如果功能規格符合清單中的條件，請勾選該項目。如果不符合，則保留空白。
 ```
 
-The output of this step will include a number of implementation detail documents, with your directory tree resembling this:
+重要的是，要利用與 Claude Code 的互動作為澄清規格相關問題的機會——**不要將它的第一次嘗試視為最終版本**。
+
+### **步驟 3：** 產生計畫
+
+現在你可以具體說明技術 stack 和其他技術需求。你可以使用專案樣板內建的 `/plan` 指令，搭配這樣的提示：
+
+```text
+我們將使用 .NET Aspire 來產生這個應用程式，使用 Postgres 作為資料庫。前端應該使用 Blazor server，具備拖拉式任務看板和即時更新功能。應該建立一個 REST API，包含專案 API、任務 API 和通知 API。
+```
+
+此步驟的輸出將包含多個實作細節文件，你的目錄樹將類似於：
 
 ```text
 .
@@ -339,66 +332,52 @@ The output of this step will include a number of implementation detail documents
     └── tasks-template.md
 ```
 
-Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask Claude Code to refine it if any of the components stand out, or even have it check the locally-installed version of the platform/framework you want to use (e.g., .NET).
+檢查 `research.md` 文件，確保根據你的指示使用了正確的技術 stack。如果任何元件看起來突出，你可以要求 Claude Code 精煉它，甚至讓它檢查你想使用的平台/框架的本地安裝版本（例如 .NET）。
 
-Additionally, you might want to ask Claude Code to research details about the chosen tech stack if it's something that is rapidly changing (e.g., .NET Aspire, JS frameworks), with a prompt like this:
+此外，如果所選的技術 stack 是快速變化的技術（例如 .NET Aspire、JS 框架），你可能會想要求 Claude Code 研究相關細節，可以使用這樣的提示：
 
 ```text
-I want you to go through the implementation plan and implementation details, looking for areas that could
-benefit from additional research as .NET Aspire is a rapidly changing library. For those areas that you identify that
-require further research, I want you to update the research document with additional details about the specific
-versions that we are going to be using in this Taskify application and spawn parallel research tasks to clarify
-any details using research from the web.
+我希望你檢視實作計畫和實作細節，尋找可能需要額外研究的領域，因為 .NET Aspire 是一個快速變化的函式庫。對於你識別出需要進一步研究的領域，我希望你使用我們將在這個 Taskify 應用程式中使用的特定版本的額外細節來更新研究文件，並啟動平行研究任務來透過網路研究澄清任何細節。
 ```
 
-During this process, you might find that Claude Code gets stuck researching the wrong thing - you can help nudge it in the right direction with a prompt like this:
+在此過程中，你可能會發現 Claude Code 卡在研究錯誤的事物上——你可以用這樣的提示幫助引導它往正確方向：
 
 ```text
-I think we need to break this down into a series of steps. First, identify a list of tasks
-that you would need to do during implementation that you're not sure of or would benefit
-from further research. Write down a list of those tasks. And then for each one of these tasks,
-I want you to spin up a separate research task so that the net results is we are researching
-all of those very specific tasks in parallel. What I saw you doing was it looks like you were
-researching .NET Aspire in general and I don't think that's gonna do much for us in this case.
-That's way too untargeted research. The research needs to help you solve a specific targeted question.
+我認為我們需要將此分解為一系列步驟。首先，識別一個在實作過程中你不確定或會受益於進一步研究的任務清單。寫下這些任務的清單。然後對於每一個任務，我希望你啟動一個獨立的研究任務，這樣我們就能平行研究所有這些非常具體的任務。我看到你在做的是似乎在研究一般的 .NET Aspire，我認為這在這種情況下對我們沒有太大幫助。那太過於無目標的研究。研究需要幫助你解決特定的目標問題。
 ```
 
 >[!NOTE]
->Claude Code might be over-eager and add components that you did not ask for. Ask it to clarify the rationale and the source of the change.
+>Claude Code 可能會過於積極並添加你沒有要求的元件。要求它澄清理由和變更的來源。
 
-### **STEP 4:** Have Claude Code validate the plan
+### **步驟 4：** 讓 Claude Code 驗證計畫
 
-With the plan in place, you should have Claude Code run through it to make sure that there are no missing pieces. You can use a prompt like this:
+計畫就緒後，你應該讓 Claude Code 檢視一遍，確保沒有遺漏的部分。你可以使用這樣的提示：
 
 ```text
-Now I want you to go and audit the implementation plan and the implementation detail files.
-Read through it with an eye on determining whether or not there is a sequence of tasks that you need
-to be doing that are obvious from reading this. Because I don't know if there's enough here. For example,
-when I look at the core implementation, it would be useful to reference the appropriate places in the implementation
-details where it can find the information as it walks through each step in the core implementation or in the refinement.
+現在我希望你去審核實作計畫和實作細節檔案。在閱讀時，請專注於確定是否有一系列明顯需要執行的任務。因為我不確定這裡是否有足夠的資訊。例如，當我查看核心實作時，如果能在實作細節中參考適當的地方，讓它在執行核心實作或精煉的每個步驟時能找到資訊，這會很有用。
 ```
 
-This helps refine the implementation plan and helps you avoid potential blind spots that Claude Code missed in its planning cycle. Once the initial refinement pass is complete, ask Claude Code to go through the checklist once more before you can get to the implementation.
+這有助於精煉實作計畫，並幫助你避免 Claude Code 在規劃週期中遺漏的潛在盲點。初步精煉完成後，在進入實作階段前，請 Claude Code 再次檢視清單。
 
-You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
+你也可以要求 Claude Code（如果你已安裝 [GitHub CLI](https://docs.github.com/en/github-cli/github-cli)）從目前分支到 `main` 建立一個詳細描述的 pull request，以確保工作得到適當追蹤。
 
 >[!NOTE]
->Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [constitution](base/memory/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
+>在讓 agent 實作之前，也值得提示 Claude Code 交叉檢查細節，看看是否有任何過度設計的部分（記住——它可能會過於積極）。如果存在過度設計的元件或決策，你可以要求 Claude Code 解決它們。確保 Claude Code 在建立計畫時遵循 [constitution](base/memory/constitution.md) 作為必須遵守的基礎原則。
 
-### STEP 5: Implementation
+### 步驟 5：實作
 
-Once ready, instruct Claude Code to implement your solution (example path included):
+準備就緒後，指示 Claude Code 實作你的解決方案（包含範例路徑）：
 
 ```text
 implement specs/002-create-taskify/plan.md
 ```
 
-Claude Code will spring into action and will start creating the implementation.
+Claude Code 將立即開始行動並開始建立實作。
 
 >[!IMPORTANT]
->Claude Code will execute local CLI commands (such as `dotnet`) - make sure you have them installed on your machine.
+>Claude Code 將執行本地 CLI 指令（例如 `dotnet`）——請確保你的機器上已安裝這些指令。
 
-Once the implementation step is done, ask Claude Code to try to run the application and resolve any emerging build errors. If the application runs, but there are _runtime errors_ that are not directly available to Claude Code through CLI logs (e.g., errors rendered in browser logs), copy and paste the error in Claude Code and have it attempt to resolve it.
+實作步驟完成後，要求 Claude Code 嘗試執行應用程式並解決任何出現的建置錯誤。如果應用程式可以執行，但存在 Claude Code 無法透過 CLI 日誌直接取得的 _執行時錯誤_（例如，在瀏覽器日誌中呈現的錯誤），請將錯誤複製並貼上到 Claude Code 中，讓它嘗試解決。
 
 </details>
 
