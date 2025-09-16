@@ -32,96 +32,96 @@
 9. Return: SUCCESS (tasks ready for execution)
 ```
 
-## Format: `[ID] [P?] Description`
-- **[P]**: Can run in parallel (different files, no dependencies)
-- Include exact file paths in descriptions
+## 格式：`[ID] [P?] Description`
+- **[P]**：可以並行執行（不同檔案，無相依性）
+- 在描述中包含精確的檔案路徑
 
-## Path Conventions
-- **Single project**: `src/`, `tests/` at repository root
-- **Web app**: `backend/src/`, `frontend/src/`
-- **Mobile**: `api/src/`, `ios/src/` or `android/src/`
-- Paths shown below assume single project - adjust based on plan.md structure
+## 路徑約定
+- **單一專案**：repository 根目錄的 `src/`、`tests/`
+- **Web app**：`backend/src/`、`frontend/src/`
+- **Mobile**：`api/src/`、`ios/src/` 或 `android/src/`
+- 以下顯示的路徑假設為單一專案 - 根據 plan.md 結構調整
 
-## Phase 3.1: Setup
-- [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+## 第 3.1 階段：設定
+- [ ] T001 按照實作計畫建立專案結構
+- [ ] T002 使用 [程式語言] 初始化專案與 [framework] 相依性
+- [ ] T003 [P] 設定 linting 和格式化工具
 
-## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
-**CRITICAL: These tests MUST be written and MUST FAIL before ANY implementation**
-- [ ] T004 [P] Contract test POST /api/users in tests/contract/test_users_post.py
-- [ ] T005 [P] Contract test GET /api/users/{id} in tests/contract/test_users_get.py
-- [ ] T006 [P] Integration test user registration in tests/integration/test_registration.py
-- [ ] T007 [P] Integration test auth flow in tests/integration/test_auth.py
+## 第 3.2 階段：測試優先 (TDD) ⚠️ 必須在 3.3 之前完成
+**關鍵**：這些測試必須撰寫且必須在任何實作之前失敗
+- [ ] T004 [P] 在 tests/contract/test_users_post.py 中對 POST /api/users 進行契約測試
+- [ ] T005 [P] 在 tests/contract/test_users_get.py 中對 GET /api/users/{id} 進行契約測試
+- [ ] T006 [P] 在 tests/integration/test_registration.py 中進行使用者註冊整合測試
+- [ ] T007 [P] 在 tests/integration/test_auth.py 中進行認證流程整合測試
 
-## Phase 3.3: Core Implementation (ONLY after tests are failing)
-- [ ] T008 [P] User model in src/models/user.py
-- [ ] T009 [P] UserService CRUD in src/services/user_service.py
-- [ ] T010 [P] CLI --create-user in src/cli/user_commands.py
+## 第 3.3 階段：核心實作（僅在測試失敗後）
+- [ ] T008 [P] 在 src/models/user.py 中建立 User 模型
+- [ ] T009 [P] 在 src/services/user_service.py 中建立 UserService CRUD
+- [ ] T010 [P] 在 src/cli/user_commands.py 中建立 CLI --create-user
 - [ ] T011 POST /api/users endpoint
 - [ ] T012 GET /api/users/{id} endpoint
-- [ ] T013 Input validation
-- [ ] T014 Error handling and logging
+- [ ] T013 輸入驗證
+- [ ] T014 錯誤處理和日誌記錄
 
-## Phase 3.4: Integration
-- [ ] T015 Connect UserService to DB
+## 第 3.4 階段：整合
+- [ ] T015 連接 UserService 到 DB
 - [ ] T016 Auth middleware
-- [ ] T017 Request/response logging
-- [ ] T018 CORS and security headers
+- [ ] T017 Request/response 日誌記錄
+- [ ] T018 CORS 和安全標頭
 
-## Phase 3.5: Polish
-- [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
-- [ ] T020 Performance tests (<200ms)
-- [ ] T021 [P] Update docs/api.md
-- [ ] T022 Remove duplication
-- [ ] T023 Run manual-testing.md
+## 第 3.5 階段：精製
+- [ ] T019 [P] 在 tests/unit/test_validation.py 中進行驗證的單元測試
+- [ ] T020 效能測試 (<200ms)
+- [ ] T021 [P] 更新 docs/api.md
+- [ ] T022 移除重複
+- [ ] T023 執行 manual-testing.md
 
-## Dependencies
-- Tests (T004-T007) before implementation (T008-T014)
-- T008 blocks T009, T015
-- T016 blocks T018
-- Implementation before polish (T019-T023)
+## 相依性
+- 測試 (T004-T007) 在實作 (T008-T014) 之前
+- T008 阻擋 T009、T015
+- T016 阻擋 T018
+- 實作在精製 (T019-T023) 之前
 
-## Parallel Example
+## 並行範例
 ```
-# Launch T004-T007 together:
-Task: "Contract test POST /api/users in tests/contract/test_users_post.py"
-Task: "Contract test GET /api/users/{id} in tests/contract/test_users_get.py"
-Task: "Integration test registration in tests/integration/test_registration.py"
-Task: "Integration test auth in tests/integration/test_auth.py"
+# 一起啟動 T004-T007：
+Task: "在 tests/contract/test_users_post.py 中對 POST /api/users 進行契約測試"
+Task: "在 tests/contract/test_users_get.py 中對 GET /api/users/{id} 進行契約測試"
+Task: "在 tests/integration/test_registration.py 中進行註冊整合測試"
+Task: "在 tests/integration/test_auth.py 中進行認證整合測試"
 ```
 
-## Notes
-- [P] tasks = different files, no dependencies
-- Verify tests fail before implementing
-- Commit after each task
-- Avoid: vague tasks, same file conflicts
+## 注意事項
+- [P] 任務 = 不同檔案，無相依性
+- 在實作前驗證測試失敗
+- 每個任務後提交
+- 避免：模糊任務、相同檔案衝突
 
-## Task Generation Rules
-*Applied during main() execution*
+## 任務生成規則
+*在 main() 執行期間應用*
 
-1. **From Contracts**:
-   - Each contract file → contract test task [P]
-   - Each endpoint → implementation task
+1. **從契約**：
+   - 每個契約檔案 → 契約測試任務 [P]
+   - 每個 endpoint → 實作任務
    
-2. **From Data Model**:
-   - Each entity → model creation task [P]
-   - Relationships → service layer tasks
+2. **從資料模型**：
+   - 每個實體 → 模型建立任務 [P]
+   - 關係 → 服務層任務
    
-3. **From User Stories**:
-   - Each story → integration test [P]
-   - Quickstart scenarios → validation tasks
+3. **從使用者故事**：
+   - 每個故事 → 整合測試 [P]
+   - Quickstart 情境 → 驗證任務
 
-4. **Ordering**:
-   - Setup → Tests → Models → Services → Endpoints → Polish
-   - Dependencies block parallel execution
+4. **排序**：
+   - 設定 → 測試 → 模型 → 服務 → Endpoint → 精製
+   - 相依性阻擋並行執行
 
-## Validation Checklist
-*GATE: Checked by main() before returning*
+## 驗證檢查清單
+*關卡：在返回前由 main() 檢查*
 
-- [ ] All contracts have corresponding tests
-- [ ] All entities have model tasks
-- [ ] All tests come before implementation
-- [ ] Parallel tasks truly independent
-- [ ] Each task specifies exact file path
-- [ ] No task modifies same file as another [P] task
+- [ ] 所有契約都有相應的測試
+- [ ] 所有實體都有模型任務
+- [ ] 所有測試都在實作之前
+- [ ] 並行任務真正獨立
+- [ ] 每個任務指定精確的檔案路徑
+- [ ] 沒有任務修改與其他 [P] 任務相同的檔案

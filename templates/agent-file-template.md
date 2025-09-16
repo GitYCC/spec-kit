@@ -2,21 +2,21 @@
 
 Auto-generated from all feature plans. Last updated: [DATE]
 
-## Active Technologies
+## 使用中的技術
 [EXTRACTED FROM ALL PLAN.MD FILES]
 
-## Project Structure
+## 專案結構
 ```
 [ACTUAL STRUCTURE FROM PLANS]
 ```
 
-## Commands
+## 指令
 [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES]
 
-## Code Style
+## 程式碼風格
 [LANGUAGE-SPECIFIC, ONLY FOR LANGUAGES IN USE]
 
-## Recent Changes
+## 最近變更
 [LAST 3 FEATURES AND WHAT THEY ADDED]
 
 <!-- MANUAL ADDITIONS START -->
