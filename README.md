@@ -8,23 +8,41 @@
     <strong>透過 Spec-Driven Development 的協助，讓組織能夠專注於產品情境，而非撰寫同質化程式碼。</strong>
 </p>
 
-[![Release](https://github.com/github/spec-kit/actions/workflows/release.yml/badge.svg)](https://github.com/github/spec-kit/actions/workflows/release.yml)
+[![Release](https://github.com/GitYCC/spec-kit/actions/workflows/release.yml/badge.svg)](https://github.com/GitYCC/spec-kit/actions/workflows/release.yml)
 
 ---
 
 ## 目錄
 
+- [目錄](#目錄)
 - [🤔 什麼是 Spec-Driven Development？](#-什麼是-spec-driven-development)
 - [⚡ 開始使用](#-開始使用)
+  - [1. 安裝 Specify](#1-安裝-specify)
+  - [2. 建立 spec](#2-建立-spec)
+  - [3. 建立技術實作計畫](#3-建立技術實作計畫)
+  - [4. 分解並實作](#4-分解並實作)
 - [📽️ 影片概覽](#️-影片概覽)
 - [🔧 Specify CLI Reference](#-specify-cli-reference)
+  - [指令](#指令)
+  - [`specify init` 參數與選項](#specify-init-參數與選項)
+  - [範例](#範例)
 - [📚 核心理念](#-核心理念)
 - [🌟 開發階段](#-開發階段)
 - [🎯 實驗目標](#-實驗目標)
+  - [技術獨立性](#技術獨立性)
+  - [企業限制](#企業限制)
+  - [以使用者為中心的開發](#以使用者為中心的開發)
+  - [創意與順代式流程](#創意與順代式流程)
 - [🔧 前置需求](#-前置需求)
 - [📖 深入了解](#-深入了解)
 - [📋 詳細流程](#-詳細流程)
+  - [**步驟 1：** 啟動專案](#步驟-1-啟動專案)
+  - [**步驟 2：** 功能規格澄清](#步驟-2-功能規格澄清)
+  - [**步驟 3：** 產生計畫](#步驟-3-產生計畫)
+  - [**步驟 4：** 讓 Claude Code 驗證計畫](#步驟-4-讓-claude-code-驗證計畫)
+  - [步驟 5：實作](#步驟-5實作)
 - [🔍 疑難排解](#-疑難排解)
+  - [Linux 上的 Git Credential Manager](#linux-上的-git-credential-manager)
 - [👥 維護者](#-維護者)
 - [💬 支援](#-支援)
 - [🙏 致謝](#-致謝)
@@ -41,7 +59,7 @@ Spec-Driven Development **顛覆了**傳統軟體開發的做法。數十年來�
 根據你使用的 coding agent 來初始化專案：
 
 ```bash
-uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME>
+uvx --from git+https://github.com/GitYCC/spec-kit.git specify init <PROJECT_NAME>
 ```
 
 ### 2. 建立 spec
@@ -49,7 +67,7 @@ uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME
 使用 **`/specify`** 指令來描述你想要建構的內容。專注於**什麼**和**為什麼**，而非技術 stack。
 
 ```bash
-/specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
+/specify 建立一個應用程式，可以幫助我將照片整理到不同的相簿中。相簿按日期分組，並且可以在主頁面上透過拖拉的方式重新排列。相簿永遠不會巢狀在其他相簿內。在每個相簿中，照片會以瓷磚式介面預覽顯示。
 ```
 
 ### 3. 建立技術實作計畫
@@ -57,7 +75,7 @@ uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME
 使用 **`/plan`** 指令來提供你的技術 stack 和架構選擇。
 
 ```bash
-/plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
+/plan 這個應用程式使用 Vite 並搭配最少數量的程式庫。盡可能使用原生的 HTML、CSS 和 JavaScript。圖片不會上傳到任何地方，元數據會儲存在本地的 SQLite 資料庫中。
 ```
 
 ### 4. 分解並實作
@@ -409,7 +427,7 @@ rm gcm-linux_amd64.2.6.1.deb
 
 ## 💬 支援
 
-如需支援，請開啟 [GitHub issue](https://github.com/github/spec-kit/issues/new)。我們歡迎 bug 報告、功能請求，以及關於使用 Spec-Driven Development 的問題。
+如需支援，請開啟 [GitHub issue](https://github.com/GitYCC/spec-kit/issues/new)。我們歡迎 bug 報告、功能請求，以及關於使用 Spec-Driven Development 的問題。
 
 ## 🙏 致謝
 
